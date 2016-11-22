@@ -10,9 +10,10 @@ namespace Lab3
     {
         static void Main(string[] args)
         {
-            var runtime = new Runtime();
+            Console.WindowWidth = 150;
+            var ui = new Ui();
 
-            runtime.Start();
+            ui.MainMenu();
         }
     }
 }
