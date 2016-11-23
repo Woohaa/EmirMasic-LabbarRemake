@@ -8,8 +8,20 @@ using System.Threading.Tasks;
 
 namespace Lab13
 {
+    public delegate void ErrorMessageDisplay();
+
+
     class Runtime
     {
+        public event ErrorMessageDisplay ErrorMessageText;
+
+        public Runtime()
+        {
+            ErrorMessageText += () => { Console.WriteLine("ERROR! You must enter a choice from menu!"); };
+        }
+
+
+
         Ui ui = new Ui();
 
         public void Start()
@@ -40,6 +52,10 @@ namespace Lab13
                         break;
                     case ConsoleKey.D5:
                         isMainMenu = false;
+                        break;
+                    default:
+                        ErrorMessageText.Invoke();
+                        Console.ReadKey(true);
                         break;
                 }
             }
@@ -79,6 +95,10 @@ namespace Lab13
                         break;
                     case ConsoleKey.D5:
                         isGameFilter = false;
+                        break;
+                    default:
+                        ErrorMessageText.Invoke();
+                        Console.ReadKey();
                         break;
                 }
             }
