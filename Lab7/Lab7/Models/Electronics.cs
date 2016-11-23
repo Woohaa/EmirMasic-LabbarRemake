@@ -12,7 +12,7 @@ namespace Lab7.Models
 
         public override string ToString()
         {
-            return "Brand: " + Brand + " Product: " + ProductName + " Price: " + Price + "kr";
+            return  "Product: " + ProductName + "Brand: " + Brand + " Price: " + Price + "kr";
         }
     }
 }

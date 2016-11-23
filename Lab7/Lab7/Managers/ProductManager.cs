@@ -23,6 +23,8 @@ namespace Lab7.Managers
             new Food {ProductName = "Sparkling Water", Manufacturer = "Ramlösa", Price = 14.90 },
         };
 
+        List<ISellable> shoppingCart = new List<ISellable>();
+
         public List<ISellable> GetList()
         {
             return storeList;
@@ -30,10 +32,84 @@ namespace Lab7.Managers
 
         public void ShowList()
         {
-            foreach (var product in storeList)
+            for (int i = 0; i < storeList.Count; i++)
+            {
+                Console.WriteLine((i + 1) + " " + storeList[i]);
+            }
+        }
+
+        public void AddNewProduct(int input)
+        {
+            if (input == 1)
+            {
+                Electronics newElectronic = new Electronics();
+
+                Console.WriteLine("Product name: ");
+                newElectronic.ProductName = Console.ReadLine();
+                Console.WriteLine("Product brand: ");
+                newElectronic.Brand = Console.ReadLine();
+                Console.WriteLine("Product price: ");
+                newElectronic.Price = double.Parse(Console.ReadLine());
+
+                storeList.Add(newElectronic);
+            }
+
+            if (input == 2)
+            {
+                Toy newToy = new Toy();
+
+                Console.WriteLine("Product name: ");
+                newToy.ProductName = Console.ReadLine();
+                Console.WriteLine("Product brand: ");
+                newToy.ToyType = Console.ReadLine();
+                Console.WriteLine("Product price: ");
+                newToy.Price = double.Parse(Console.ReadLine());
+
+                storeList.Add(newToy);
+            }
+
+            if (input == 3)
+            {
+                Food newFood = new Food();
+
+                Console.WriteLine("Product name: ");
+                newFood.ProductName = Console.ReadLine();
+                Console.WriteLine("Product brand: ");
+                newFood.Manufacturer = Console.ReadLine();
+                Console.WriteLine("Product price: ");
+                newFood.Price = double.Parse(Console.ReadLine());
+
+                storeList.Add(newFood);
+            }
+
+        }
+
+        public void RemoveProduct(int input)
+        {
+            storeList.RemoveAt(input - 1);
+        }
+
+        public void AddToShoppingCart(int input)
+        {
+
+            shoppingCart.Add(storeList[input]);
+        
+        }
+
+        public void ShowShoppingCart()
+        {
+            double totalPrice;
+            foreach (var product in shoppingCart)
             {
                 Console.WriteLine(product);
             }
+
+            totalPrice = shoppingCart.Sum(p => p.Price);
+            Console.WriteLine();
+            Console.WriteLine("Total price: " + totalPrice);
         }
+
+
+
     }
 }
